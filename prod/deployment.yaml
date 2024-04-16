@@ -20,5 +20,5 @@ spec:
       containers:
       - image: nginx
         name: ipnginx
-        port:
+        ports:
         - containerPort: 80
