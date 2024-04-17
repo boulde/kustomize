@@ -99,10 +99,8 @@ pipeline {
     
     stage('Push to Git Repository') {
       steps {
-        withCredentials([gitUsernamePassword(credentialsId: 'credential-github', gitToolName: 'Default')]) {
-               sh "git config --global user.email ${gitEmail}"
-               sh "git config --global user.name ${gitName}"
-               sh "git push -u origin main"       
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: githubCredential, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+             sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/kustomize"       
         }
       }
     }
