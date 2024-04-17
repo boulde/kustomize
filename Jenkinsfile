@@ -100,7 +100,9 @@ pipeline {
     stage('Push to Git Repository') {
       steps {
         withCredentials([gitUsernamePassword(credentialsId: 'credential-github', gitToolName: 'Default')]) {
-        sh "git push -u origin main"       
+               sh "git config --global user.email ${gitEmail}"
+               sh "git config --global user.name ${gitName}"
+               sh "git push -u origin main"       
         }
       }
     }
