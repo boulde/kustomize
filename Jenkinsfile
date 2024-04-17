@@ -82,7 +82,7 @@ pipeline {
     stage('Deploy') { 
       steps {
         // git 계정 로그인, 해당 레포지토리의 main 브랜치에서 클론
-        git credentialsId: 'credential-github',
+        git credentialsId: githubCredential,
             url: 'https://github.com/boulde/kustomize.git',
             branch: 'main'  
         
@@ -94,8 +94,11 @@ pipeline {
         sh "git status"
         sh "git commit -m 'update the image tagg'"
         sh "git branch -M main"
-        sh "git push -u origin main"
-        
+
+    stage("Push to Git Repository") {
+      steps {
+        withCredentials([gitUsernamePassword(credentialsId: githubCredential, gitToolName: 'Default')]) {
+        sh "git push -u origin main"       
       }
     }
   }
