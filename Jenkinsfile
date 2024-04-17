@@ -94,12 +94,12 @@ pipeline {
         sh "git status"
         sh "git commit -m 'update the image tagg'"
         sh "git branch -M main"
-
+       }
+     }
     stage("Push to Git Repository") {
       steps {
         withCredentials([gitUsernamePassword(credentialsId: githubCredential, gitToolName: 'Default')]) {
         sh "git push -u origin main"       
-      }
-    }
+     
   }
 }
