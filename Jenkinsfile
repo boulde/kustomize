@@ -101,6 +101,8 @@ pipeline {
       steps {
         withCredentials([gitUsernamePassword(credentialsId: githubCredential, gitToolName: 'Default')]) {
         sh "git push -u origin main"       
-     
+        }
+      }
+    }
   }
 }
