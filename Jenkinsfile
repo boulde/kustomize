@@ -92,7 +92,7 @@ pipeline {
         sh "cd prod && kustomize edit set image ${awsecrRegistry}:${currentBuild.number}"
         sh "git add -A"
         sh "git status"
-        sh "git commit -m 'update the image tag'"
+        sh "git commit -m 'update the image tagg'"
         sh "git branch -M main"
         sh "git push -u origin main"
         
