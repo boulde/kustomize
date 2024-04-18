@@ -100,7 +100,6 @@ pipeline {
     stage('Push to Git Repository') {
       steps {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: githubCredential, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
-          sh "git tag -a v1 -m 'jenkins update'"   
           sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/boulde/kustomize.git"       
         }
       }
